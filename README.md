@@ -1,4 +1,4 @@
-# Project Title
+# php-bitcoin-trading-bot
 
 PHP Bitcoin Auto Trading Bot
 
