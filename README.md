@@ -12,12 +12,12 @@ PHP 7.0 +
 
 ### Installing
 
--Upload files to server.
--Create database and database user on server.
--Import db.sql to new database.
--Set up your database informations in inc/settings.php
--Create a 1 minute cron job (cron/data.php)
--Script is ready (Default username: admin password: admin)
+-Upload files to server.__
+-Create database and database user on server.__
+-Import db.sql to new database.__
+-Set up your database informations in inc/settings.php__
+-Create a 1 minute cron job (cron/data.php)__
+-Script is ready (Default username: admin password: admin)__
 
 ## Built With
 
@@ -27,6 +27,11 @@ PHP 7.0 +
 
 * **Osman Adak** - [osmanadak.com](http://osmanadak.com/)
 
+
+## Sponsor
+
+[mobilapk.com](https://mobilapk.com/)
+
 ## Extra
 
-Buy me a coffee. My Bitcoin address is : 1ExXMF2WF6ScokfLXZXs8QCgb88SvGdD9W
+If you want to support, my Bitcoin address is : 1ExXMF2WF6ScokfLXZXs8QCgb88SvGdD9W
