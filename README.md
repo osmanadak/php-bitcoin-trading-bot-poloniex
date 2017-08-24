@@ -12,12 +12,12 @@ PHP 7.0 +
 
 ### Installing
 
--Upload files to server.__
--Create database and database user on server.__
--Import db.sql to new database.__
--Set up your database informations in inc/settings.php__
--Create a 1 minute cron job (cron/data.php)__
--Script is ready (Default username: admin password: admin)__
+-Upload files to server.<br>
+-Create database and database user on server.<br>
+-Import db.sql to new database.<br>
+-Set up your database informations in inc/settings.php<br>
+-Create a 1 minute cron job (cron/data.php)<br>
+-Script is ready (Default username: admin password: admin)
 
 ## Built With
 
