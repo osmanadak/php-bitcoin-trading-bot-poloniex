@@ -22,7 +22,7 @@ if($_GET['type'] == "saveApiSettings"){
 if($_GET['type'] == "changePassword"){
     $password = md5($_POST['password']);
     $stmt = $dbh->prepare("update users set password = '$password'");
-    //$stmt->execute();
+    $stmt->execute();
 }
 if($_GET['type'] == "cancelOrder"){
     $cancelOrder = $polo->cancel_order($_POST['coin'],$_POST['orderNumber']);
