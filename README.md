@@ -21,11 +21,11 @@ PHP 7.0 +
 
 ## Built With
 
-* [PHP](http://www.php.net/) - PHP Hypertext Preprocessor
+[PHP](http://www.php.net/) - PHP Hypertext Preprocessor
 
 ## Authors
 
-* **Osman Adak** - [osmanadak.com](http://osmanadak.com/)
+**Osman Adak** - [osmanadak.com](http://osmanadak.com/)
 
 
 ## Contact
