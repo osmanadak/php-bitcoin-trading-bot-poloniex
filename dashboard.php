@@ -103,26 +103,49 @@ include("inc/header.php");
                     <!-- Recent Items -->
                     <div class="card">
                         <div class="card-header">
-                            <h2>Last Activities <small>Your last Buy/Sell Activities</small></h2>
-                            <ul class="actions">
-                                <li class="dropdown">
-                                    <a href="" data-toggle="dropdown">
-                                        <i class="zmdi zmdi-more-vert"></i>
-                                    </a>
+                            <h2>Balances <small>Your current balances</small></h2>
+                        </div>
+                        <?php
+                        $balances = $polo->get_balances();
 
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li>
-                                            <a href="">Refresh</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Settings</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Other Settings</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        ?>
+
+                        <div class="card-body m-t-0">
+                            <table class="table table-inner table-vmiddle">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Coin</th>
+                                    <th>Balance</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $i = 0;
+                                foreach($balances as $key=>$value){
+                                if($value > 0) {
+                                    $i++;
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $i;?></td>
+                                        <td><?php echo $key;?></td>
+                                        <td><?php echo $value;?></td>
+                                    </tr>
+                                <?php }} ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Recent Items -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Last Activities <small>Your last Buy/Sell Activities</small></h2>
                         </div>
 
                         <div class="card-body m-t-0">
@@ -162,25 +185,6 @@ include("inc/header.php");
                     <div class="card">
                         <div class="card-header">
                             <h2>Your Rules <small>Your Buy/Sell Rules</small></h2>
-                            <ul class="actions">
-                                <li class="dropdown">
-                                    <a href="" data-toggle="dropdown">
-                                        <i class="zmdi zmdi-more-vert"></i>
-                                    </a>
-
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li>
-                                            <a href="">Refresh</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Settings</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Other Settings</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </div>
 
                         <div class="card-body m-t-0">
