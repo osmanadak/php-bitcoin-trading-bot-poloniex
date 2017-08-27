@@ -180,7 +180,7 @@ include("inc/footer.php");
     function editRule(){
         $.post('inc/data.php?type=editRule&id=<?php echo $rule['id']; ?>',$('#ruleForm').serialize(),function(r){
             toastr.options.closeButton = true;
-            toastr.success('Password changed successfully!', 'Password Changed!', {
+            toastr.success('Rule saved successfully!', 'Rule saved!', {
                 "positionClass": "toast-top-center",
                 timeOut: 5000
             });
