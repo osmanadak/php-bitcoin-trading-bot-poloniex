@@ -1,6 +1,5 @@
 <?php
 include("inc/header.php");
-//Dashboard
 ?>
 <section id="main">
     <section id="content">

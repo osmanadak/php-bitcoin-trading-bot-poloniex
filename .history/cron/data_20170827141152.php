@@ -4,7 +4,6 @@
  * User: osmanadak
  * Date: 13.08.17
  * Time: 13:18
- *Cron
  */
 
 require_once('../inc/settings.php');
