@@ -125,6 +125,8 @@ while($rules = $stmt1->fetch()){
         echo "Alim yapacak<br>";
         $amount = bolmeBtc($settings['btc_amount_per_buy'], $newestPrice);
         $buyResult = $polo->buy($rules['coin'], $newestPrice, $amount);
+        echo "<pre>";
+        print_r($buyResult);
         $sellPercent = 1 + ($rules['buy_percent']/100);
         $sellPrice = carpmaBtc( 1.03, $newestPrice);
         if($rules['stop_loss'] > 0){
@@ -164,14 +166,16 @@ while($rules = $stmt1->fetch()){
                 //Sat
 
                 $satis = $polo->sell($rules['coin'], $a["sellPrice"], carpmaBtc($a["amount"],0.9975));
-                $text = $a["amount"]." Sell Order saved for ".$rules['coin']." with price ".$a["sellPrice"];
-                $stmt = $dbh->prepare("insert into notifications set text='$text', date = NOW()");
-                $stmt->execute();
                 echo "<pre></pre>";
                 var_dump($satis);
-                $sellOrderNumber = $satis["orderNumber"];
-                $stmt = $dbh->prepare("update processes set status = 0, sellOrderNumber = '$sellOrderNumber' where id='$a[id]'");
-                $stmt->execute();
+                if(!empty($satis[error])){
+                    $text = $a["amount"]." Sell Order saved for ".$rules['coin']." with price ".$a["sellPrice"];
+                    $stmt = $dbh->prepare("insert into notifications set text='$text', date = NOW()");
+                    $stmt->execute();
+                    $sellOrderNumber = $satis["orderNumber"];
+                    $stmt = $dbh->prepare("update processes set status = 0, sellOrderNumber = '$sellOrderNumber' where id='$a[id]'");
+                    $stmt->execute();
+                }
             }
         }
     }
@@ -186,11 +190,21 @@ $balances = $polo->get_balances();
 $total = 0;
 foreach($balances as $key=>$value){
     if($value > 0) {
+        $valueOnOpenOrder = $polo->get_open_orders("BTC_".$key);
+        for($k=0; $k<count($valueOnOpenOrder); $k++){
+            if($valueOnOpenOrder[$k]['orderNumber'] != ""){
+                $value = toplamaBtc($value, $valueOnOpenOrder[$k]['amount']);
+            }
+        }
+
         $stmt = $dbh->prepare("select last from data where coinType='BTC_$key' order by id desc limit 1");
         $stmt->execute();
         $price = $stmt->fetch();
         $last = $price['last'];
-        //echo $key."-".carpmaBtc($last, $value)."-".$last."-".$value."<br>";
+        if($last == ""){
+            $last = 1;
+        }
+        //echo $key."<br>Total: ".carpmaBtc($last, $value)."<br>Last:".$last."<br>Value: ".$value."<br><br>";
         if($last == 0){
             $last = 1;
         }
