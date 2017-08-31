@@ -122,7 +122,7 @@ while($rules = $stmt1->fetch()){
     echo "Buy Percent: ".$buyPercent."<br><br>";
 
     if(($buyPercent < 0 and $percentChange < $buyPercent) or ($buyPercent > 0 and $percentChange > $buyPercent)) {
-        echo "Alim yapacak<br>";
+        echo "Buying process<br>";
         $amount = bolmeBtc($settings['btc_amount_per_buy'], $newestPrice);
         $buyResult = $polo->buy($rules['coin'], $newestPrice, $amount);
         echo "<pre>";
