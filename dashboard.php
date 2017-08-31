@@ -117,21 +117,22 @@ include("inc/header.php");
                                     <th>ID</th>
                                     <th>Coin</th>
                                     <th>Balance</th>
+                                    <th>BTC Value</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-                                $i = 0;
-                                foreach($balances as $key=>$value){
-                                if($value > 0) {
-                                    $i++;
+                                $stmt = $dbh->prepare("SELECT * from current_balances order by id asc");
+                                $stmt->execute();
+                                while($row = $stmt->fetch()){
                                     ?>
                                     <tr>
-                                        <td><?php echo $i;?></td>
-                                        <td><?php echo $key;?></td>
-                                        <td><?php echo $value;?></td>
+                                        <td><?php echo $row['id'];?></td>
+                                        <td><?php echo $row['coin'];?></td>
+                                        <td><?php echo $row['balance'];?></td>
+                                        <td><?php echo $row['btc_value'];?></td>
                                     </tr>
-                                <?php }} ?>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -202,7 +203,9 @@ include("inc/header.php");
                                 <?php
                                 $stmt = $dbh->prepare("select * from rules");
                                 $stmt->execute();
+                                $i = 0;
                                 while ($rules = $stmt->fetch()) {
+                                    $i++;
                                     $time = $rules['time'];
                                     if($time < 60){
                                         $time = $time." mins";
@@ -213,7 +216,7 @@ include("inc/header.php");
                                     }
                                     ?>
                                     <tr>
-                                        <td><?php echo $rules['id'];?></td>
+                                        <td><?php echo $i;?></td>
                                         <td><?php echo $rules['coin'];?></td>
                                         <td><?php if($rules['buy_type'] == 1){echo "Dump";}elseif($rules['buy_type'] == 2){echo "Pump";} ?></td>
                                         <td><?php echo $time;?></td>

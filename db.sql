@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost:3306
--- Üretim Zamanı: 24 Ağu 2017, 13:35:16
--- Sunucu sürümü: 5.6.35
+-- Üretim Zamanı: 31 Ağu 2017, 18:54:31
+-- Sunucu sürümü: 5.6.37
 -- PHP Sürümü: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -55,6 +57,19 @@ CREATE TABLE `api_settings` (
 
 INSERT INTO `api_settings` (`id`, `api_key`, `api_secret`, `btc_amount_per_buy`, `buy_limit_per_coin`) VALUES
 (1, '', '', '0.00200000', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `current_balances`
+--
+
+CREATE TABLE `current_balances` (
+  `id` int(11) NOT NULL,
+  `coin` varchar(255) COLLATE utf8_bin NOT NULL,
+  `balance` decimal(20,8) NOT NULL,
+  `btc_value` decimal(20,8) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -178,6 +193,12 @@ ALTER TABLE `api_settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Tablo için indeksler `current_balances`
+--
+ALTER TABLE `current_balances`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Tablo için indeksler `data`
 --
 ALTER TABLE `data`
@@ -230,6 +251,11 @@ ALTER TABLE `actions`
 ALTER TABLE `api_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- Tablo için AUTO_INCREMENT değeri `current_balances`
+--
+ALTER TABLE `current_balances`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- Tablo için AUTO_INCREMENT değeri `data`
 --
 ALTER TABLE `data`
@@ -258,7 +284,8 @@ ALTER TABLE `total_btc`
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

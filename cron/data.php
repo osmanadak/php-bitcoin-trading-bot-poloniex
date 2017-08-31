@@ -188,6 +188,10 @@ $stmt->execute();
 
 $balances = $polo->get_balances();
 $total = 0;
+
+$stmt = $dbh->prepare("TRUNCATE current_balances");
+$stmt->execute();
+
 foreach($balances as $key=>$value){
     if($value > 0) {
         $valueOnOpenOrder = $polo->get_open_orders("BTC_".$key);
@@ -208,7 +212,10 @@ foreach($balances as $key=>$value){
         if($last == 0){
             $last = 1;
         }
-        $total = $total + carpmaBtc($last, $value);
+        $btcValue = carpmaBtc($last, $value);
+        $total = $total + $btcValue;
+        $stmt_balance = $dbh->prepare("insert into current_balances set coin = '$key', balance = '$value', btc_value = '$btcValue'");
+        $stmt_balance->execute();
     }
 }
 $stmt = $dbh->prepare("insert into total_btc set amount = '$total', date=NOW()");
