@@ -12,14 +12,14 @@ if(isset($_POST)) {
 
             /* Remember me */
             if($_POST['remember']) {
-            $key = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 255);
-            /* Delete existing keys */
-            $stmt = $dbh->prepare("DELETE FROM remember WHERE user_id='$us[id]'");
-            $stmt->execute();
-            /* Delete existing keys */
-            $stmt = $dbh->prepare("INSERT INTO remember (user_id, rand_key) VALUES('$us[id]', '$key')")or die(mysql_error());
-            $stmt->execute();
-            setcookie("REMEMBER_ME", $key, time() + (86400 * 60), "/");  //Set cookie for 2 months
+                $key = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 255);
+                /* Delete existing keys */
+                $stmt = $dbh->prepare("DELETE FROM remember WHERE user_id='$us[id]'");
+                $stmt->execute();
+                /* Delete existing keys */
+                $stmt = $dbh->prepare("INSERT INTO remember (user_id, rand_key) VALUES('$us[id]', '$key')")or die(mysql_error());
+                $stmt->execute();
+                setcookie("REMEMBER_ME", $key, time() + (86400 * 60), "/");  //Set cookie for 2 months
             }
             /* Remember me */
 
@@ -38,7 +38,7 @@ if(isset($_POST)) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Material Admin</title>
+    <title>BTC AUTOTRADER | Smart Coin Trader Robot</title>
 
     <!-- Vendor CSS -->
     <link href="css/animate.min.css" rel="stylesheet">
@@ -52,33 +52,33 @@ if(isset($_POST)) {
 <body class="login-content">
 <!-- Login -->
 <div class="lc-block toggled" id="l-login">
-<form method="POST">
-    <div class="input-group m-b-20">
-        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-        <div class="fg-line">
-            <input type="text" name="username" class="form-control" placeholder="Username">
+    <form method="POST">
+        <div class="input-group m-b-20">
+            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+            <div class="fg-line">
+                <input type="text" name="username" class="form-control" placeholder="Username">
+            </div>
         </div>
-    </div>
 
-    <div class="input-group m-b-20">
-        <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
-        <div class="fg-line">
-            <input type="password" name="password" class="form-control" placeholder="Password">
+        <div class="input-group m-b-20">
+            <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+            <div class="fg-line">
+                <input type="password" name="password" class="form-control" placeholder="Password">
+            </div>
         </div>
-    </div>
 
-    <div class="clearfix"></div>
+        <div class="clearfix"></div>
 
-    <div class="checkbox">
-        <label>
-            <input type="checkbox" value="" name="remember">
-            <i class="input-helper"></i>
-            Keep me signed in
-        </label>
-    </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="" name="remember">
+                <i class="input-helper"></i>
+                Keep me signed in
+            </label>
+        </div>
 
-    <button type="submit" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
-</form>
+        <button type="submit" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
+    </form>
 
 </div>
 
