@@ -12,7 +12,7 @@ include("inc/header.php");
                             <div class="clearfix">
                                 <div class="chart stats-bar"></div>
                                 <div class="count">
-                                    <small>Total Balance</small>
+                                    <small><?php echo $lang["total_balance"];?></small>
                                     <h2>
                                         <?php
                                         $stmt = $dbh->prepare("select * from total_btc order by id desc limit 1");
@@ -32,7 +32,7 @@ include("inc/header.php");
                             <div class="clearfix">
                                 <div class="chart stats-line"></div>
                                 <div class="count">
-                                    <small>Profit Today</small>
+                                    <small><?php echo $lang["profit_today"];?></small>
                                     <h2>
                                         <?php
                                         $stmt = $dbh->prepare("select * from total_btc where date > (NOW() - INTERVAL 1 DAY) order by id asc limit 1");
@@ -55,7 +55,7 @@ include("inc/header.php");
                             <div class="clearfix">
                                 <div class="chart stats-line"></div>
                                 <div class="count">
-                                    <small>Profit Last 7 Days</small>
+                                    <small><?php echo $lang["profit_last_7_days"];?></small>
                                     <h2>
                                         <?php
                                         $stmt = $dbh->prepare("select * from total_btc where date > (NOW() - INTERVAL 7 DAY) order by id asc limit 1");
@@ -78,7 +78,7 @@ include("inc/header.php");
                             <div class="clearfix">
                                 <div class="chart stats-line-2"></div>
                                 <div class="count">
-                                    <small>Profit Last 30 Days</small>
+                                    <small><?php echo $lang["profit_last_30_days"];?></small>
                                     <h2>
                                         <?php
                                         $stmt = $dbh->prepare("select * from total_btc where date > (NOW() - INTERVAL 30 DAY) order by id asc limit 1");
@@ -103,7 +103,7 @@ include("inc/header.php");
                     <!-- Recent Items -->
                     <div class="card">
                         <div class="card-header">
-                            <h2>Balances <small>Your current balances</small></h2>
+                            <h2><?php echo $lang["balances"];?> <small><?php echo $lang["your_current_balances"];?></small></h2>
                         </div>
                         <?php
                         $balances = $polo->get_balances();
@@ -115,9 +115,9 @@ include("inc/header.php");
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Coin</th>
-                                    <th>Balance</th>
-                                    <th>BTC Value</th>
+                                    <th><?php echo $lang["coin"];?></th>
+                                    <th><?php echo $lang["balance"];?></th>
+                                    <th><?php echo $lang["btc_value"];?></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -146,7 +146,7 @@ include("inc/header.php");
                     <!-- Recent Items -->
                     <div class="card">
                         <div class="card-header">
-                            <h2>Last Activities <small>Your last Buy/Sell Activities</small></h2>
+                            <h2><?php echo $lang["last_activities"];?> <small><?php echo $lang["your_last_buy_sell_activities"];?></small></h2>
                         </div>
 
                         <div class="card-body m-t-0">
@@ -154,8 +154,8 @@ include("inc/header.php");
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Notification</th>
-                                    <th>Date</th>
+                                    <th><?php echo $lang["notification"];?></th>
+                                    <th><?php echo $lang["date"];?></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -185,7 +185,7 @@ include("inc/header.php");
                     <!-- Recent Items -->
                     <div class="card">
                         <div class="card-header">
-                            <h2>Your Rules <small>Your Buy/Sell Rules</small></h2>
+                            <h2><?php echo $lang["your_rules"];?> <small><?php echo $lang["your_buy_sell_rules"];?></small></h2>
                         </div>
 
                         <div class="card-body m-t-0">
@@ -193,10 +193,10 @@ include("inc/header.php");
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Coin</th>
-                                    <th>Buy Type</th>
-                                    <th>Time</th>
-                                    <th>Buy %</th>
+                                    <th><?php echo $lang["coin"];?></th>
+                                    <th><?php echo $lang["buy_type"];?></th>
+                                    <th><?php echo $lang["time"];?></th>
+                                    <th><?php echo $lang["buy"];?> %</th>
                                 </tr>
                                 </thead>
                                 <tbody>

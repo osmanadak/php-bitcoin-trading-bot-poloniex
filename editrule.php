@@ -12,7 +12,7 @@ $rule = $stmt->fetch();
             <form id="ruleForm">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Edit Rule <small>Edit Rule Definition</small></h2>
+                        <h2><?php echo $lang["edit_rule"];?> <small><?php echo $lang["edit_rule_definition"];?></small></h2>
                         <ul class="actions">
                             <li>
                                 <a href="rules.php">
@@ -27,7 +27,7 @@ $rule = $stmt->fetch();
                             <div class="fg-line">
                                 <div class="select">
                                     <select id="coin" name="coin" class="form-control" onchange="coinChanged(this.value);">
-                                        <option value="0">Select an Altcoin</option>
+                                        <option value="0"><?php echo $lang["select_an_altcoin"];?></option>
                                         <?php
                                         for($i = 0; $i < count($coins); $i++){
                                             if(substr($coins[$i],0,4) == "BTC_"){
@@ -40,20 +40,20 @@ $rule = $stmt->fetch();
                         </div>
                         <div class="form-group">
                             <div class="fg-line">
-                                Buy Price: <span id="buyPrice"> - </span>
+                                <?php echo $lang["buy_price"];?>: <span id="buyPrice"> - </span>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="fg-line">
-                                Sell Price: <span id="sellPrice"> - </span>
+                                <?php echo $lang["sell_price"];?>: <span id="sellPrice"> - </span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="fg-line">
                                 <div class="select">
                                     <select id="buy_type" name="buy_type" class="form-control">
-                                        <option>Select Buy Type</option>
+                                        <option><?php echo $lang["select_buy_type"];?></option>
                                         <option <?php if($rule['buy_type'] == "1"){echo "selected"; }?> value="1">Dump</option>
                                         <option <?php if($rule['buy_type'] == "2"){echo "selected"; }?> value="2">Pump</option>
                                     </select>
@@ -65,21 +65,21 @@ $rule = $stmt->fetch();
                                 <div class="select">
                                     <select id="time" name="time" class="form-control">
                                         <option value="0">Select Time</option>
-                                        <option <?php if($rule['time'] == "1"){echo "selected"; }?> value="1">1 minute</option>
-                                        <option <?php if($rule['time'] == "2"){echo "selected"; }?> value="2">2 minutes</option>
-                                        <option <?php if($rule['time'] == "3"){echo "selected"; }?> value="3">3 minutes</option>
-                                        <option <?php if($rule['time'] == "4"){echo "selected"; }?> value="4">4 minutes</option>
-                                        <option <?php if($rule['time'] == "5"){echo "selected"; }?> value="5">5 minutes</option>
-                                        <option <?php if($rule['time'] == "10"){echo "selected"; }?> value="10">10 minutes</option>
-                                        <option <?php if($rule['time'] == "15"){echo "selected"; }?> value="15">15 minutes</option>
-                                        <option <?php if($rule['time'] == "20"){echo "selected"; }?> value="20">20 minutes</option>
-                                        <option <?php if($rule['time'] == "30"){echo "selected"; }?> value="30">30 minutes</option>
-                                        <option <?php if($rule['time'] == "60"){echo "selected"; }?> value="60">1 hour</option>
-                                        <option <?php if($rule['time'] == "120"){echo "selected"; }?> value="120">2 hours</option>
-                                        <option <?php if($rule['time'] == "180"){echo "selected"; }?> value="180">3 hours</option>
-                                        <option <?php if($rule['time'] == "360"){echo "selected"; }?> value="360">6 hours</option>
-                                        <option <?php if($rule['time'] == "720"){echo "selected"; }?> value="720">12 hours</option>
-                                        <option <?php if($rule['time'] == "1440"){echo "selected"; }?> value="1440">1 day</option>
+                                        <option <?php if($rule['time'] == "1"){echo "selected"; }?> value="1">1 <?php echo $lang["minute"];?></option>
+                                        <option <?php if($rule['time'] == "2"){echo "selected"; }?> value="2">2 <?php echo $lang["minutes"];?></option>
+                                        <option <?php if($rule['time'] == "3"){echo "selected"; }?> value="3">3 <?php echo $lang["minutes"];?></option>
+                                        <option <?php if($rule['time'] == "4"){echo "selected"; }?> value="4">4 <?php echo $lang["minutes"];?></option>
+                                        <option <?php if($rule['time'] == "5"){echo "selected"; }?> value="5">5 <?php echo $lang["minutes"];?></option>
+                                        <option <?php if($rule['time'] == "10"){echo "selected"; }?> value="10">10 <?php echo $lang["minutes"];?></option>
+                                        <option <?php if($rule['time'] == "15"){echo "selected"; }?> value="15">15 <?php echo $lang["minutes"];?></option>
+                                        <option <?php if($rule['time'] == "20"){echo "selected"; }?> value="20">20 <?php echo $lang["minutes"];?></option>
+                                        <option <?php if($rule['time'] == "30"){echo "selected"; }?> value="30">30 <?php echo $lang["minutes"];?></option>
+                                        <option <?php if($rule['time'] == "60"){echo "selected"; }?> value="60">1 <?php echo $lang["hour"];?></option>
+                                        <option <?php if($rule['time'] == "120"){echo "selected"; }?> value="120">2 <?php echo $lang["hours"];?></option>
+                                        <option <?php if($rule['time'] == "180"){echo "selected"; }?> value="180">3 <?php echo $lang["hours"];?></option>
+                                        <option <?php if($rule['time'] == "360"){echo "selected"; }?> value="360">6 <?php echo $lang["hours"];?></option>
+                                        <option <?php if($rule['time'] == "720"){echo "selected"; }?> value="720">12 <?php echo $lang["hours"];?></option>
+                                        <option <?php if($rule['time'] == "1440"){echo "selected"; }?> value="1440">1 <?php echo $lang["day"];?></option>
                                     </select>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@ $rule = $stmt->fetch();
                             <div class="fg-line">
                                 <div class="select">
                                     <select id="buy_percent" name="buy_percent" class="form-control">
-                                        <option value="0">Select Buy %</option>
+                                        <option value="0"><?php echo $lang["select_buy"];?> %</option>
                                         <option <?php if($rule['buy_percent'] == "1"){echo "selected"; }?> value="1">1 %</option>
                                         <option <?php if($rule['buy_percent'] == "2"){echo "selected"; }?> value="2">2 %</option>
                                         <option <?php if($rule['buy_percent'] == "3"){echo "selected"; }?> value="3">3 %</option>
@@ -112,7 +112,7 @@ $rule = $stmt->fetch();
                             <div class="fg-line">
                                 <div class="select">
                                     <select id="sell_on_profit" name="sell_on_profit" class="form-control">
-                                        <option value="0">Sell on Profit %</option>
+                                        <option value="0"><?php echo $lang["sell_on_profit"];?> %</option>
                                         <option <?php if($rule['sell_on_profit'] == "1"){echo "selected"; }?> value="1">1 %</option>
                                         <option <?php if($rule['sell_on_profit'] == "2"){echo "selected"; }?> value="2">2 %</option>
                                         <option <?php if($rule['sell_on_profit'] == "3"){echo "selected"; }?> value="3">3 %</option>
@@ -135,7 +135,7 @@ $rule = $stmt->fetch();
                             <div class="fg-line">
                                 <div class="select">
                                     <select id="stop_loss" name="stop_loss" class="form-control">
-                                        <option>Stop Loss %</option>
+                                        <option><?php echo $lang["stop_loss"];?> %</option>
                                         <option <?php if($rule['stop_loss'] == "1"){echo "selected"; }?> value="1">1 %</option>
                                         <option <?php if($rule['stop_loss'] == "2"){echo "selected"; }?> value="2">2 %</option>
                                         <option <?php if($rule['stop_loss'] == "3"){echo "selected"; }?> value="3">3 %</option>
@@ -156,7 +156,7 @@ $rule = $stmt->fetch();
                         </div>
                         <div class="form-group">
                             <div class="fg-line">
-                                <button type="button" class="btn btn-success" onclick="editRule(); return false;">Save Rule</button>
+                                <button type="button" class="btn btn-success" onclick="editRule(); return false;"><?php echo $lang["save_rule"];?></button>
                             </div>
                         </div>
                     </div>

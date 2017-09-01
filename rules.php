@@ -11,7 +11,7 @@ include("inc/header.php");
                     <!-- Recent Items -->
                     <div class="card">
                         <div class="card-header">
-                            <h2>Your Rules <small>Your Buy/Sell Rules</small></h2>
+                            <h2><?php echo $lang["your_rules"];?> <small><?php echo $lang["your_buy_sell_rules"];?></small></h2>
                             <ul class="actions">
                                 <li>
                                     <a href="newrule.php">
@@ -25,11 +25,11 @@ include("inc/header.php");
                             <table class="table table-inner table-vmiddle">
                                 <thead>
                                 <tr>
-                                    <th>Coin</th>
-                                    <th>Buy Type</th>
-                                    <th>Time</th>
-                                    <th>Buy %</th>
-                                    <th>Actions</th>
+                                    <th><?php echo $lang["coin"];?></th>
+                                    <th><?php echo $lang["buy_type"];?></th>
+                                    <th><?php echo $lang["time"];?></th>
+                                    <th><?php echo $lang["buy"];?> %</th>
+                                    <th><?php echo $lang["actions"];?></th>
                                 </tr>
                                 </thead>
                                 <tbody>
