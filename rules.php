@@ -50,7 +50,7 @@ include("inc/header.php");
                                 ?>
                                 <tr>
                                     <td><?php echo substr($rules['coin'],4,4);?></td>
-                                    <td><?php if($rules['buy_type'] == 1){echo "Dump";}elseif($rules['buy_type'] == 2){echo "Pump";} ?></td>
+                                    <td><?php if($rules['buy_type'] == 1){echo "Price (-)";}elseif($rules['buy_type'] == 2){echo "Price (+)";}elseif($rules['buy_type'] == 3){echo "Volume (-)";}elseif($rules['buy_type'] == 4){echo "Volume (+)";} ?></td>
                                     <td><?php echo $time;?></td>
                                     <td><?php echo $rules['buy_percent'];?></td>
                                     <td style="width: 145px;">

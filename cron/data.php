@@ -101,16 +101,24 @@ while($rules = $stmt1->fetch()){
     $stmt = $dbh->prepare("SELECT * from data where coinType = '$rules[coin]' and date > (NOW() - INTERVAL $time MINUTE) order by date desc");
     $stmt->execute();
     $lastPrices = array();
+    $lastVolume = array();
     while($row = $stmt->fetch()){
         $lastPrices[] =  $row['last'];
+        $lastVolumes[] =  $row['baseVolume'];
     }
     $newestPrice = $lastPrices[0];
     $oldestPrice = $lastPrices[count($lastPrices) - 1];
 
+    $newestVolume = $lastVolumes[0];
+    $oldestVolume = $lastVolumes[count($lastVolumes) - 1];
+
     echo "Newest: ".$newestPrice."<br>Oldest: ".$oldestPrice."<br>";
+    echo "Newest Volume: ".$newestVolume."<br>Oldest Volume: ".$oldestVolume."<br>";
 
     $percentChange = ($newestPrice - $oldestPrice)*100/$oldestPrice;
+    $percentVolumeChange = ($newestVolume - $oldestVolume)*100/$oldestVolume;
     echo "Change %: ".$percentChange."<br>";
+    echo "Change % (Volume): ".$percentVolumeChange."<br>";
 
     if($rules['buy_type'] == "1"){
         $buyPercent = $rules['buy_percent']*(-1);
@@ -118,27 +126,55 @@ while($rules = $stmt1->fetch()){
     if($rules['buy_type'] == "2"){
         $buyPercent = $rules['buy_percent'];
     }
+    if($rules['buy_type'] == "3"){
+        $buyPercent = $rules['buy_percent']*(-1);
+    }
+    if($rules['buy_type'] == "4"){
+        $buyPercent = $rules['buy_percent'];
+    }
 
     echo "Buy Percent: ".$buyPercent."<br><br>";
 
-    if(($buyPercent < 0 and $percentChange < $buyPercent) or ($buyPercent > 0 and $percentChange > $buyPercent)) {
-        echo "Buying process<br>";
-        $amount = bolmeBtc($settings['btc_amount_per_buy'], $newestPrice);
-        $buyResult = $polo->buy($rules['coin'], $newestPrice, $amount);
-        echo "<pre>";
-        print_r($buyResult);
-        $sellPercent = 1 + ($rules['buy_percent']/100);
-        $sellPrice = carpmaBtc( 1.03, $newestPrice);
-        if($rules['stop_loss'] > 0){
-            $stopLossPrice = carpmaBtc( (1-$rules['stop_loss']/100), $newestPrice);
-        }else{
-            $stopLossPrice = 0;
+    if($rules['buy_type'] == "1" or $rules['buy_type'] == "2") {
+        if (($buyPercent < 0 and $percentChange < $buyPercent) or ($buyPercent > 0 and $percentChange > $buyPercent)) {
+            echo "Buying process<br>";
+            $amount = bolmeBtc($settings['btc_amount_per_buy'], $newestPrice);
+            $buyResult = $polo->buy($rules['coin'], $newestPrice, $amount);
+            echo "<pre>";
+            print_r($buyResult);
+            $sellPercent = 1 + ($rules['buy_percent'] / 100);
+            $sellPrice = carpmaBtc(1.03, $newestPrice);
+            if ($rules['stop_loss'] > 0) {
+                $stopLossPrice = carpmaBtc((1 - $rules['stop_loss'] / 100), $newestPrice);
+            } else {
+                $stopLossPrice = 0;
+            }
+
+            $orderNumber = $buyResult["orderNumber"];
+            $stmt = $dbh->prepare("INSERT INTO processes (coinType, buyPrice, sellPrice, stopLossPrice, status, orderNumber,amount) VALUES ('$rules[coin]', '$newestPrice', '$sellPrice', '$stopLossPrice', 1, '$orderNumber', '$amount')");
+            $stmt->execute();
         }
+    }
 
-        $orderNumber = $buyResult["orderNumber"];
-        $stmt = $dbh->prepare("INSERT INTO processes (coinType, buyPrice, sellPrice, stopLossPrice, status, orderNumber,amount) VALUES ('$rules[coin]', '$newestPrice', '$sellPrice', '$stopLossPrice', 1, '$orderNumber', '$amount')");
-        $stmt->execute();
+    if($rules['buy_type'] == "3" or $rules['buy_type'] == "4") {
+        if (($buyPercent < 0 and $percentVolumeChange < $buyPercent) or ($buyPercent > 0 and $percentVolumeChange > $buyPercent)) {
+            echo "Buying process<br>";
+            $amount = bolmeBtc($settings['btc_amount_per_buy'], $newestPrice);
+            $buyResult = $polo->buy($rules['coin'], $newestPrice, $amount);
+            echo "<pre>";
+            print_r($buyResult);
+            $sellPercent = 1 + ($rules['buy_percent'] / 100);
+            $sellPrice = carpmaBtc(1.03, $newestPrice);
+            if ($rules['stop_loss'] > 0) {
+                $stopLossPrice = carpmaBtc((1 - $rules['stop_loss'] / 100), $newestPrice);
+            } else {
+                $stopLossPrice = 0;
+            }
 
+            $orderNumber = $buyResult["orderNumber"];
+            $stmt = $dbh->prepare("INSERT INTO processes (coinType, buyPrice, sellPrice, stopLossPrice, status, orderNumber,amount) VALUES ('$rules[coin]', '$newestPrice', '$sellPrice', '$stopLossPrice', 1, '$orderNumber', '$amount')");
+            $stmt->execute();
+        }
     }
 
     sleep(1); // ?!

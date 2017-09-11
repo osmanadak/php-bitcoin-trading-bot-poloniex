@@ -51,8 +51,10 @@ $coins = $polo->get_trading_pairs();
                                 <div class="select">
                                     <select id="buy_type" name="buy_type" class="form-control">
                                         <option><?php echo $lang["select_buy_type"];?></option>
-                                        <option value="1">Dump</option>
-                                        <option value="2">Pump</option>
+                                        <option value="1">Price (-)</option>
+                                        <option value="2">Price (+)</option>
+                                        <option value="3">Volume (-)</option>
+                                        <option value="4">Volume (+)</option>
                                     </select>
                                 </div>
                             </div>

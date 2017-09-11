@@ -54,8 +54,10 @@ $rule = $stmt->fetch();
                                 <div class="select">
                                     <select id="buy_type" name="buy_type" class="form-control">
                                         <option><?php echo $lang["select_buy_type"];?></option>
-                                        <option <?php if($rule['buy_type'] == "1"){echo "selected"; }?> value="1">Dump</option>
-                                        <option <?php if($rule['buy_type'] == "2"){echo "selected"; }?> value="2">Pump</option>
+                                        <option <?php if($rule['buy_type'] == "1"){echo "selected"; }?> value="1">Price (-)</option>
+                                        <option <?php if($rule['buy_type'] == "2"){echo "selected"; }?> value="2">Price (+)</option>
+                                        <option <?php if($rule['buy_type'] == "3"){echo "selected"; }?> value="3">Volume (-)</option>
+                                        <option <?php if($rule['buy_type'] == "4"){echo "selected"; }?> value="4">Volume (+)</option>
                                     </select>
                                 </div>
                             </div>
