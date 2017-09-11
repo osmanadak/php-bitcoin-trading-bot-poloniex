@@ -30,11 +30,8 @@ include("inc/header.php");
                     <div class="col-sm-6 col-md-3">
                         <div class="mini-charts-item bgm-lightgreen">
                             <div class="clearfix">
-                                <div class="chart stats-line"></div>
-                                <div class="count">
-                                    <small><?php echo $lang["profit_today"];?></small>
-                                    <h2>
-                                        <?php
+                                <div class="chart count">
+                                    <h2><?php
                                         $stmt = $dbh->prepare("select * from total_btc where date > (NOW() - INTERVAL 1 DAY) order by id asc limit 1");
                                         $stmt->execute();
                                         $row = $stmt->fetch();
@@ -42,9 +39,14 @@ include("inc/header.php");
                                         if($yesterdaysAmount == ""){
                                             $yesterdaysAmount = 0;
                                         }
-                                        echo cikarmaBtc($lastAmount,$yesterdaysAmount);
-                                        ?>
-                                        BTC</h2>
+                                        $profitToday = cikarmaBtc($lastAmount,$yesterdaysAmount);
+                                        echo number_format(($profitToday*100)/($lastAmount-$profitToday), 2, ',', '.');
+                                        ?> %</h2>
+                                </div>
+                                <div class="count">
+                                    <small><?php echo $lang["profit_today"];?></small>
+                                    <h2>
+                                        <?php echo $profitToday; ?> BTC</h2>
                                 </div>
                             </div>
                         </div>
@@ -53,19 +55,27 @@ include("inc/header.php");
                     <div class="col-sm-6 col-md-3">
                         <div class="mini-charts-item bgm-orange">
                             <div class="clearfix">
-                                <div class="chart stats-line"></div>
+                                <div class="chart count">
+                                    <h2>
+                                        <?php
+                                            $stmt = $dbh->prepare("select * from total_btc where date > (NOW() - INTERVAL 7 DAY) order by id asc limit 1");
+                                            $stmt->execute();
+                                            $row = $stmt->fetch();
+                                            $lastWeekAmount = $row['amount'];
+                                            if($lastWeekAmount == ""){
+                                                $lastWeekAmount = 0;
+                                            }
+                                            $profitThisWeek =  cikarmaBtc($lastAmount,$lastWeekAmount);
+                                            echo number_format(($profitThisWeek*100)/($lastAmount-$profitThisWeek), 2, ',', '.');
+                                        ?> %
+                                    </h2>
+                                </div>
                                 <div class="count">
                                     <small><?php echo $lang["profit_last_7_days"];?></small>
                                     <h2>
                                         <?php
-                                        $stmt = $dbh->prepare("select * from total_btc where date > (NOW() - INTERVAL 7 DAY) order by id asc limit 1");
-                                        $stmt->execute();
-                                        $row = $stmt->fetch();
-                                        $lastWeekAmount = $row['amount'];
-                                        if($lastWeekAmount == ""){
-                                            $lastWeekAmount = 0;
-                                        }
-                                        echo cikarmaBtc($lastAmount,$lastWeekAmount);
+
+                                        echo $profitThisWeek;
                                         ?>
                                         BTC</h2>
                                 </div>
@@ -76,19 +86,26 @@ include("inc/header.php");
                     <div class="col-sm-6 col-md-3">
                         <div class="mini-charts-item bgm-bluegray">
                             <div class="clearfix">
-                                <div class="chart stats-line-2"></div>
+                                <div class="chart count">
+                                    <h2>
+                                        <?php
+                                            $stmt = $dbh->prepare("select * from total_btc where date > (NOW() - INTERVAL 30 DAY) order by id asc limit 1");
+                                            $stmt->execute();
+                                            $row = $stmt->fetch();
+                                            $lastMonthAmount = $row['amount'];
+                                            if($lastMonthAmount == ""){
+                                                $lastMonthAmount = 0;
+                                            }
+                                            $profitThisMonth = cikarmaBtc($lastAmount,$lastMonthAmount);
+                                            echo number_format(($profitThisMonth*100)/($lastAmount-$profitThisMonth), 2, ',', '.');
+                                        ?> %
+                                    </h2>
+                                </div>
                                 <div class="count">
                                     <small><?php echo $lang["profit_last_30_days"];?></small>
                                     <h2>
                                         <?php
-                                        $stmt = $dbh->prepare("select * from total_btc where date > (NOW() - INTERVAL 30 DAY) order by id asc limit 1");
-                                        $stmt->execute();
-                                        $row = $stmt->fetch();
-                                        $lastMonthAmount = $row['amount'];
-                                        if($lastMonthAmount == ""){
-                                            $lastMonthAmount = 0;
-                                        }
-                                        echo cikarmaBtc($lastAmount,$lastMonthAmount);
+                                        echo $profitThisMonth;
                                         ?>
                                         BTC</h2>
                                 </div>

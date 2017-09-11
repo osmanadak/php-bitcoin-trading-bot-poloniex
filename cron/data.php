@@ -143,7 +143,7 @@ while($rules = $stmt1->fetch()){
             echo "<pre>";
             print_r($buyResult);
             $sellPercent = 1 + ($rules['buy_percent'] / 100);
-            $sellPrice = carpmaBtc(1.03, $newestPrice);
+            $sellPrice = carpmaBtc($sellPercent, $newestPrice);
             if ($rules['stop_loss'] > 0) {
                 $stopLossPrice = carpmaBtc((1 - $rules['stop_loss'] / 100), $newestPrice);
             } else {
@@ -164,7 +164,7 @@ while($rules = $stmt1->fetch()){
             echo "<pre>";
             print_r($buyResult);
             $sellPercent = 1 + ($rules['buy_percent'] / 100);
-            $sellPrice = carpmaBtc(1.03, $newestPrice);
+            $sellPrice = carpmaBtc($sellPercent, $newestPrice);
             if ($rules['stop_loss'] > 0) {
                 $stopLossPrice = carpmaBtc((1 - $rules['stop_loss'] / 100), $newestPrice);
             } else {
