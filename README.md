@@ -38,4 +38,4 @@ osmanadak@yandex.com
 
 ## Extra
 
-If you want to donate my btc wallet address is 1PavtWu59TUeaJfxdU7XkXBpbgTRLsu4Za
+If you want to donate my btc wallet address is 1GVJfovbUyMugDyNrsyx6i1HndkCpWipzt
